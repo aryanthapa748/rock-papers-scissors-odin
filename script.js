@@ -11,14 +11,31 @@ function getComputerChoice(){
     }
 }
 
-// 2) GETTING SELECTION FROM THE USER VIA PROMPT
+/* 2) GETTING SELECTION FROM THE USER VIA PROMPT
 function getHumanChoice(){
     return prompt('Please choose between Rock, Paper and Scissors !', '');
-}
+} */
 
 // 3) Declare the players score variables TO KEEP TRACK OF THE SCORES
 let humanScore = 0;
 let computerScore = 0;
+
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+
+rockButton.addEventListener('click', function(){
+    playGame('Rock');
+});
+
+paperButton.addEventListener('click', function(){
+    playGame('Paper');
+});
+
+scissorsButton.addEventListener('click', function(){
+    playGame('Scissors');
+});
+
 
 // 4) Logic to play a single round
 function playRound(humanChoice, computerChoice){
@@ -43,45 +60,33 @@ function playRound(humanChoice, computerChoice){
 }
 
 // 5) function to play 5 rounds of game and declare a winner at the end
-function playGame(){
-    const humanSelection1 = getHumanChoice();
-    const computerSelection1 = getComputerChoice();
-    console.log(playRound(humanSelection1, computerSelection1));
-    console.log(`Round 1: You chose ${humanSelection1}. Your Score = ${humanScore}`);
-    console.log(`Computer chose ${computerSelection1}. Computer Score = ${computerScore}`);
+function playGame(playerSelection){
+    const humanSelection = playerSelection;
+    const computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    
+    const result = document.querySelector('.result');
+    result.textContent = `You chose ${humanSelection}. Computer chose ${computerSelection}.`;
 
-    const humanSelection2 = getHumanChoice();
-    const computerSelection2 = getComputerChoice();
-    console.log(playRound(humanSelection2, computerSelection2));
-    console.log(`Round 2: You chose ${humanSelection2}. Your Score = ${humanScore}`);
-    console.log(`Computer chose ${computerSelection2}. Computer Score = ${computerScore}`);
+    const score = document.querySelector('.score');
+    score.textContent = ` Your Score: ${humanScore}. Computer Score ${computerScore}`;
 
-    const humanSelection3 = getHumanChoice();
-    const computerSelection3 = getComputerChoice();
-    console.log(playRound(humanSelection3, computerSelection3));
-    console.log(`Round 3: You chose ${humanSelection3}. Your Score = ${humanScore}`);
-    console.log(`Computer chose ${computerSelection3}. Computer Score = ${computerScore}`);
-
-    const humanSelection4 = getHumanChoice();
-    const computerSelection4 = getComputerChoice();
-    console.log(playRound(humanSelection4, computerSelection4));
-    console.log(`Round 4: You chose ${humanSelection4}. Your Score = ${humanScore}`);
-    console.log(`Computer chose ${computerSelection4}. Computer Score = ${computerScore}`);
-
-    const humanSelection5 = getHumanChoice();
-    const computerSelection5 = getComputerChoice();
-    console.log(playRound(humanSelection5, computerSelection5));
-    console.log(`Round 5: You chose ${humanSelection5}. Your Score = ${humanScore}`);
-    console.log(`Computer chose ${computerSelection5}. Computer Score = ${computerScore}`);
-
+    const final = document.querySelector('.final');
+    
     // Declare the winner after 5 rounds
-    if (humanScore > computerScore){
-        return `You won the game! Final Score: You = ${humanScore}, Computer = ${computerScore}`;
+    if (humanScore === 5 || computerScore == 5){
+        if( humanScore > computerScore){
+        score.textContent = '';
+        final.textContent = ` Congrats !! You won this round! Final Score: You = ${humanScore}, Computer = ${computerScore}`;
     } else if (humanScore < computerScore){
-        return `You lost the game! Final Score: You = ${humanScore}, Computer = ${computerScore}`;
+        score.textContent = '';
+        final.textContent = `Oops ! You lost this round! Final Score: You = ${humanScore}, Computer = ${computerScore}`;
     } else {
-        return `It's a tie! Final Score: You = ${humanScore}, Computer = ${computerScore}`;
+        score.textContent = '';
+        final.textContent = `It's a tie! Final Score: You = ${humanScore}, Computer = ${computerScore}`; 
     }     
+    humanScore = 0;
+    computerScore = 0;
+    final.textContent = '';
+    }
 }
-
-console.log(playGame());
