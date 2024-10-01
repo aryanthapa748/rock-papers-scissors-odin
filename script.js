@@ -11,14 +11,11 @@ function getComputerChoice(){
     }
 }
 
-/* 2) GETTING SELECTION FROM THE USER VIA PROMPT
-function getHumanChoice(){
-    return prompt('Please choose between Rock, Paper and Scissors !', '');
-} */
-
-// 3) Declare the players score variables TO KEEP TRACK OF THE SCORES
+// 2) Declare the players score variables TO KEEP TRACK OF THE SCORES
 let humanScore = 0;
 let computerScore = 0;
+
+// 3) GETTING SELECTION FROM THE USER VIA ONCLICK
 
 const rockButton = document.querySelector('#rock');
 const paperButton = document.querySelector('#paper');
@@ -87,6 +84,6 @@ function playGame(playerSelection){
     }     
     humanScore = 0;
     computerScore = 0;
-    final.textContent = '';
+    final.textContent = ''; // Resetting after the final result is displayed
     }
 }
